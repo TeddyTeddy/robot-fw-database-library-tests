@@ -1,0 +1,1 @@
+python -m robot -d Results/ Tests/book_shop_db_tests.robot

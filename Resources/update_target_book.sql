@@ -1,0 +1,1 @@
+update books set stock_quantity=20 where book_id=20;
