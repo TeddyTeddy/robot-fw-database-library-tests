@@ -68,6 +68,13 @@ Target Book Does Not Exist In Database
     @{books} =      Query   ${QUERY_TARGET_BOOK}
     Length Should Be     ${books}   ${0}
 
+All Books Are Queried In Database
+    @{books} =      Query   ${QUERY_ALL_BOOKS}
+    Set Test Variable    ${books}
+
+Books Are Found
+    Should Not Be Empty     ${books}
+
 *** Test Cases ***
 Creating Target Book
     [Tags]      BAT     CRUD    Create
@@ -76,7 +83,8 @@ Creating Target Book
 
 Reading All Books
     [Tags]      BAT     CRUD    Read
-    @{books} =      Query   ${QUERY_ALL_BOOKS}
+    When All Books Are Queried In Database
+    Then Books Are Found
 
 Updating Target Book
     [Tags]      BAT     CRUD    Update
