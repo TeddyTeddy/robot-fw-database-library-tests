@@ -2,13 +2,9 @@
 Library             DatabaseLibrary
 Library             OperatingSystem
 Resource            ${EXECDIR}${/}Resources${/}book_shop_db_tests_resource.robot
-Suite Setup         Connect To Database and Check Tables Existence
-Suite Teardown      Close Database Connection
-Test Setup          Initialize Database Contents
+
 
 *** Variables ***
-${BOOK_SHOB_DB_CONFIG_FILE}         ${EXECDIR}${/}Resources${/}book_shop_db.cfg
-${INITIALIZE_DATABASE_CONTENTS}     ${EXECDIR}${/}Resources${/}book_shop_db_init.sql
 ${BOOKS_TABLE}                      books
 ${CUSTOMERS_TABLE}                  customers
 ${ORDERS_TABLE}                     orders
@@ -22,7 +18,8 @@ ${DELETE_TARGET_BOOK}               ${EXECDIR}${/}Resources${/}delete_target_boo
 
 *** Keywords ***
 Connect To Database and Check Tables Existence
-    Connect To Database     dbConfigFile=${BOOK_SHOB_DB_CONFIG_FILE}
+    [Arguments]     ${book_shop_db_config_file}
+    Connect To Database     dbConfigFile=${book_shop_db_config_file}
     Table Must Exist    ${BOOKS_TABLE}
     Table Must Exist    ${CUSTOMERS_TABLE}
     Table Must Exist    ${ORDERS_TABLE}
@@ -31,7 +28,8 @@ Close Database Connection
     Disconnect From Database
 
 Initialize Database Contents
-    Execute Sql Script    ${INITIALIZE_DATABASE_CONTENTS}
+    [Arguments]         ${initialize_database_sql}
+    Execute Sql Script    ${initialize_database_sql}
 
 Create Target Book
     Execute Sql Script      ${CREATE_TARGET_BOOK}
@@ -75,31 +73,3 @@ All Books Are Queried In Database
 Books Are Found
     Should Not Be Empty     ${books}
 
-*** Test Cases ***
-Creating Target Book
-    [Tags]      BAT     CRUD    Create
-    When Create Target Book
-    Then Target Book Exists
-
-Reading All Books
-    [Tags]      BAT     CRUD    Read
-    When All Books Are Queried In Database
-    Then Books Are Found
-
-Updating Target Book
-    [Tags]      BAT     CRUD    Update
-    Given Create Target Book
-    Given Target Book Exists
-    Given Calculate new "stock_quantity" For Target Book
-    Given Form "SQL Update Statement" For Target Book
-    When Target Books Stock Quantity Is Updated In Database
-    Then Target Book Exists
-    Then "stock_quantity" For Target Book Updated
-
-Deleting Target Book
-    [Tags]      BAT     CRUD    Delete
-    Given Create Target Book
-    Given Target Book Exists
-    Given "SQL Delete Statement" Formed For Target Book
-    When Target Book is Deleted In Database
-    Then Target Book Does Not Exist In Database

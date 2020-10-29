@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.2.1 (Python 3.7.4 on linux)" generated="20201029 10:02:03.644" rpa="false">
-<suite id="s1" name="Book Shop Db Tests" source="/home/hakan/Python/Robot/robot-fw-database-library-tests/Tests/book_shop_db_tests.robot">
-<kw name="Connect To Database and Check Tables Existence" type="setup">
+<robot generator="Robot 3.2.1 (Python 3.7.4 on linux)" generated="20201029 11:08:09.023" rpa="false">
+<suite id="s1" name="Tests" source="/home/hakan/Python/Robot/robot-fw-database-library-tests/Tests">
+<suite id="s1-s1" name="Book Shop Db Tests Mysql" source="/home/hakan/Python/Robot/robot-fw-database-library-tests/Tests/book_shop_db_tests_mysql.robot">
+<kw name="Connect To Database and Check Tables Existence" library="Common" type="setup">
+<arguments>
+<arg>${BOOK_SHOB_DB_CONFIG_FILE}</arg>
+</arguments>
 <kw name="Connect To Database" library="DatabaseLibrary">
 <doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
 connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
 <arguments>
-<arg>dbConfigFile=${BOOK_SHOB_DB_CONFIG_FILE}</arg>
+<arg>dbConfigFile=${book_shop_db_config_file}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:03.768" level="INFO">Connecting using : pymysql.connect(db=book_shop_db, user=root, passwd=h1a2k3a4, host=localhost, port=3306, charset=None) </msg>
-<status status="PASS" starttime="20201029 10:02:03.719" endtime="20201029 10:02:03.798"></status>
+<msg timestamp="20201029 11:08:09.236" level="INFO">Connecting using : pymysql.connect(db=book_shop_db, user=root, passwd=h1a2k3a4, host=localhost, port=3306, charset=None) </msg>
+<status status="PASS" starttime="20201029 11:08:09.211" endtime="20201029 11:08:09.240"></status>
 </kw>
 <kw name="Table Must Exist" library="DatabaseLibrary">
 <doc>Check if the table given exists in the database. Set optional input `sansTran` to True to run command without an
@@ -17,9 +21,9 @@ explicit transaction commit or rollback.</doc>
 <arguments>
 <arg>${BOOKS_TABLE}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:03.798" level="INFO">Executing : Table Must Exist  |  books </msg>
-<msg timestamp="20201029 10:02:03.798" level="INFO">Executing : Row Count  |  SELECT * FROM information_schema.tables WHERE table_name='books' </msg>
-<status status="PASS" starttime="20201029 10:02:03.798" endtime="20201029 10:02:03.821"></status>
+<msg timestamp="20201029 11:08:09.241" level="INFO">Executing : Table Must Exist  |  books </msg>
+<msg timestamp="20201029 11:08:09.241" level="INFO">Executing : Row Count  |  SELECT * FROM information_schema.tables WHERE table_name='books' </msg>
+<status status="PASS" starttime="20201029 11:08:09.240" endtime="20201029 11:08:09.251"></status>
 </kw>
 <kw name="Table Must Exist" library="DatabaseLibrary">
 <doc>Check if the table given exists in the database. Set optional input `sansTran` to True to run command without an
@@ -27,9 +31,9 @@ explicit transaction commit or rollback.</doc>
 <arguments>
 <arg>${CUSTOMERS_TABLE}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:03.822" level="INFO">Executing : Table Must Exist  |  customers </msg>
-<msg timestamp="20201029 10:02:03.822" level="INFO">Executing : Row Count  |  SELECT * FROM information_schema.tables WHERE table_name='customers' </msg>
-<status status="PASS" starttime="20201029 10:02:03.822" endtime="20201029 10:02:03.826"></status>
+<msg timestamp="20201029 11:08:09.252" level="INFO">Executing : Table Must Exist  |  customers </msg>
+<msg timestamp="20201029 11:08:09.252" level="INFO">Executing : Row Count  |  SELECT * FROM information_schema.tables WHERE table_name='customers' </msg>
+<status status="PASS" starttime="20201029 11:08:09.251" endtime="20201029 11:08:09.253"></status>
 </kw>
 <kw name="Table Must Exist" library="DatabaseLibrary">
 <doc>Check if the table given exists in the database. Set optional input `sansTran` to True to run command without an
@@ -37,27 +41,30 @@ explicit transaction commit or rollback.</doc>
 <arguments>
 <arg>${ORDERS_TABLE}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:03.827" level="INFO">Executing : Table Must Exist  |  orders </msg>
-<msg timestamp="20201029 10:02:03.827" level="INFO">Executing : Row Count  |  SELECT * FROM information_schema.tables WHERE table_name='orders' </msg>
-<status status="PASS" starttime="20201029 10:02:03.826" endtime="20201029 10:02:03.834"></status>
+<msg timestamp="20201029 11:08:09.253" level="INFO">Executing : Table Must Exist  |  orders </msg>
+<msg timestamp="20201029 11:08:09.253" level="INFO">Executing : Row Count  |  SELECT * FROM information_schema.tables WHERE table_name='orders' </msg>
+<status status="PASS" starttime="20201029 11:08:09.253" endtime="20201029 11:08:09.255"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:03.718" endtime="20201029 10:02:03.834"></status>
+<status status="PASS" starttime="20201029 11:08:09.210" endtime="20201029 11:08:09.255"></status>
 </kw>
-<test id="s1-t1" name="Creating Target Book">
-<kw name="Initialize Database Contents" type="setup">
+<test id="s1-s1-t1" name="Creating Target Book">
+<kw name="Initialize Database Contents" library="Common" type="setup">
+<arguments>
+<arg>${INITIALIZE_DATABASE_SQL}</arg>
+</arguments>
 <kw name="Execute Sql Script" library="DatabaseLibrary">
 <doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
 state before running your tests, or clearing out your test data after running each a test. Set optional input
 `sansTran` to True to run command without an explicit transaction commit or rollback.</doc>
 <arguments>
-<arg>${INITIALIZE_DATABASE_CONTENTS}</arg>
+<arg>${initialize_database_sql}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:03.835" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/book_shop_db_init.sql </msg>
-<status status="PASS" starttime="20201029 10:02:03.835" endtime="20201029 10:02:03.876"></status>
+<msg timestamp="20201029 11:08:09.258" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/book_shop_db_init_mysql.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.257" endtime="20201029 11:08:09.292"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:03.835" endtime="20201029 10:02:03.876"></status>
+<status status="PASS" starttime="20201029 11:08:09.257" endtime="20201029 11:08:09.292"></status>
 </kw>
-<kw name="When Create Target Book">
+<kw name="When Create Target Book" library="Common">
 <kw name="Execute Sql Script" library="DatabaseLibrary">
 <doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
 state before running your tests, or clearing out your test data after running each a test. Set optional input
@@ -65,12 +72,12 @@ state before running your tests, or clearing out your test data after running ea
 <arguments>
 <arg>${CREATE_TARGET_BOOK}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:03.877" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/create_target_book.sql </msg>
-<status status="PASS" starttime="20201029 10:02:03.877" endtime="20201029 10:02:03.882"></status>
+<msg timestamp="20201029 11:08:09.304" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/create_target_book.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.292" endtime="20201029 11:08:09.306"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:03.876" endtime="20201029 10:02:03.882"></status>
+<status status="PASS" starttime="20201029 11:08:09.292" endtime="20201029 11:08:09.307"></status>
 </kw>
-<kw name="Then Target Book Exists">
+<kw name="Then Target Book Exists" library="Common">
 <kw name="Query" library="DatabaseLibrary">
 <doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
 input `sansTran` to True to run command without an explicit transaction commit or rollback.
@@ -81,9 +88,9 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <assign>
 <var>@{books}</var>
 </assign>
-<msg timestamp="20201029 10:02:03.888" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
-<msg timestamp="20201029 10:02:03.896" level="INFO">@{books} = [ (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500) ]</msg>
-<status status="PASS" starttime="20201029 10:02:03.888" endtime="20201029 10:02:03.896"></status>
+<msg timestamp="20201029 11:08:09.309" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
+<msg timestamp="20201029 11:08:09.312" level="INFO">@{books} = [ (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500) ]</msg>
+<status status="PASS" starttime="20201029 11:08:09.308" endtime="20201029 11:08:09.312"></status>
 </kw>
 <kw name="Length Should Be" library="BuiltIn">
 <doc>Verifies that the length of the given item is correct.</doc>
@@ -91,8 +98,8 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <arg>${books}</arg>
 <arg>${1}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:03.896" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20201029 10:02:03.896" endtime="20201029 10:02:03.896"></status>
+<msg timestamp="20201029 11:08:09.312" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20201029 11:08:09.312" endtime="20201029 11:08:09.312"></status>
 </kw>
 <kw name="Set Test Variable" library="BuiltIn">
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
@@ -100,33 +107,36 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <arg>${TARGET_BOOK}</arg>
 <arg>${books}[0]</arg>
 </arguments>
-<msg timestamp="20201029 10:02:03.905" level="INFO">${TARGET_BOOK} = (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500)</msg>
-<status status="PASS" starttime="20201029 10:02:03.896" endtime="20201029 10:02:03.905"></status>
+<msg timestamp="20201029 11:08:09.323" level="INFO">${TARGET_BOOK} = (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500)</msg>
+<status status="PASS" starttime="20201029 11:08:09.316" endtime="20201029 11:08:09.323"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:03.887" endtime="20201029 10:02:03.905"></status>
+<status status="PASS" starttime="20201029 11:08:09.307" endtime="20201029 11:08:09.323"></status>
 </kw>
 <tags>
 <tag>BAT</tag>
 <tag>Create</tag>
 <tag>CRUD</tag>
 </tags>
-<status status="PASS" starttime="20201029 10:02:03.834" endtime="20201029 10:02:03.910" critical="yes"></status>
+<status status="PASS" starttime="20201029 11:08:09.255" endtime="20201029 11:08:09.324" critical="yes"></status>
 </test>
-<test id="s1-t2" name="Reading All Books">
-<kw name="Initialize Database Contents" type="setup">
+<test id="s1-s1-t2" name="Reading All Books">
+<kw name="Initialize Database Contents" library="Common" type="setup">
+<arguments>
+<arg>${INITIALIZE_DATABASE_SQL}</arg>
+</arguments>
 <kw name="Execute Sql Script" library="DatabaseLibrary">
 <doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
 state before running your tests, or clearing out your test data after running each a test. Set optional input
 `sansTran` to True to run command without an explicit transaction commit or rollback.</doc>
 <arguments>
-<arg>${INITIALIZE_DATABASE_CONTENTS}</arg>
+<arg>${initialize_database_sql}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:03.914" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/book_shop_db_init.sql </msg>
-<status status="PASS" starttime="20201029 10:02:03.913" endtime="20201029 10:02:03.947"></status>
+<msg timestamp="20201029 11:08:09.339" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/book_shop_db_init_mysql.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.333" endtime="20201029 11:08:09.363"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:03.913" endtime="20201029 10:02:03.948"></status>
+<status status="PASS" starttime="20201029 11:08:09.333" endtime="20201029 11:08:09.363"></status>
 </kw>
-<kw name="When All Books Are Queried In Database">
+<kw name="When All Books Are Queried In Database" library="Common">
 <kw name="Query" library="DatabaseLibrary">
 <doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
 input `sansTran` to True to run command without an explicit transaction commit or rollback.
@@ -137,53 +147,56 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <assign>
 <var>@{books}</var>
 </assign>
-<msg timestamp="20201029 10:02:03.949" level="INFO">Executing : Query  |  select * from books; </msg>
-<msg timestamp="20201029 10:02:03.958" level="INFO">@{books} = [ (1, 'The Namesake', 'Jhumpa', 'Lahiri', 2003, 32, 291) | (2, 'Norse Mythology', 'Neil', 'Gaiman', 2016, 43, 304) | (3, 'American Gods', 'Neil', 'Gaiman', 2001, 12, 465) | (4, 'Interpreter of Maladie...</msg>
-<status status="PASS" starttime="20201029 10:02:03.948" endtime="20201029 10:02:03.962"></status>
+<msg timestamp="20201029 11:08:09.367" level="INFO">Executing : Query  |  select * from books; </msg>
+<msg timestamp="20201029 11:08:09.372" level="INFO">@{books} = [ (1, 'The Namesake', 'Jhumpa', 'Lahiri', 2003, 32, 291) | (2, 'Norse Mythology', 'Neil', 'Gaiman', 2016, 43, 304) | (3, 'American Gods', 'Neil', 'Gaiman', 2001, 12, 465) | (4, 'Interpreter of Maladie...</msg>
+<status status="PASS" starttime="20201029 11:08:09.364" endtime="20201029 11:08:09.372"></status>
 </kw>
 <kw name="Set Test Variable" library="BuiltIn">
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
 <arguments>
 <arg>${books}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:03.963" level="INFO">${books} = [(1, 'The Namesake', 'Jhumpa', 'Lahiri', 2003, 32, 291), (2, 'Norse Mythology', 'Neil', 'Gaiman', 2016, 43, 304), (3, 'American Gods', 'Neil', 'Gaiman', 2001, 12, 465), (4, 'Interpreter of Maladies', ...</msg>
-<status status="PASS" starttime="20201029 10:02:03.962" endtime="20201029 10:02:03.963"></status>
+<msg timestamp="20201029 11:08:09.377" level="INFO">${books} = [(1, 'The Namesake', 'Jhumpa', 'Lahiri', 2003, 32, 291), (2, 'Norse Mythology', 'Neil', 'Gaiman', 2016, 43, 304), (3, 'American Gods', 'Neil', 'Gaiman', 2001, 12, 465), (4, 'Interpreter of Maladies', ...</msg>
+<status status="PASS" starttime="20201029 11:08:09.372" endtime="20201029 11:08:09.378"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:03.948" endtime="20201029 10:02:03.963"></status>
+<status status="PASS" starttime="20201029 11:08:09.363" endtime="20201029 11:08:09.378"></status>
 </kw>
-<kw name="Then Books Are Found">
+<kw name="Then Books Are Found" library="Common">
 <kw name="Should Not Be Empty" library="BuiltIn">
 <doc>Verifies that the given item is not empty.</doc>
 <arguments>
 <arg>${books}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:03.971" level="INFO">Length is 19</msg>
-<status status="PASS" starttime="20201029 10:02:03.969" endtime="20201029 10:02:03.971"></status>
+<msg timestamp="20201029 11:08:09.385" level="INFO">Length is 19</msg>
+<status status="PASS" starttime="20201029 11:08:09.380" endtime="20201029 11:08:09.385"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:03.968" endtime="20201029 10:02:03.971"></status>
+<status status="PASS" starttime="20201029 11:08:09.380" endtime="20201029 11:08:09.385"></status>
 </kw>
 <tags>
 <tag>BAT</tag>
 <tag>CRUD</tag>
 <tag>Read</tag>
 </tags>
-<status status="PASS" starttime="20201029 10:02:03.913" endtime="20201029 10:02:03.975" critical="yes"></status>
+<status status="PASS" starttime="20201029 11:08:09.331" endtime="20201029 11:08:09.388" critical="yes"></status>
 </test>
-<test id="s1-t3" name="Updating Target Book">
-<kw name="Initialize Database Contents" type="setup">
+<test id="s1-s1-t3" name="Updating Target Book">
+<kw name="Initialize Database Contents" library="Common" type="setup">
+<arguments>
+<arg>${INITIALIZE_DATABASE_SQL}</arg>
+</arguments>
 <kw name="Execute Sql Script" library="DatabaseLibrary">
 <doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
 state before running your tests, or clearing out your test data after running each a test. Set optional input
 `sansTran` to True to run command without an explicit transaction commit or rollback.</doc>
 <arguments>
-<arg>${INITIALIZE_DATABASE_CONTENTS}</arg>
+<arg>${initialize_database_sql}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:03.984" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/book_shop_db_init.sql </msg>
-<status status="PASS" starttime="20201029 10:02:03.984" endtime="20201029 10:02:04.012"></status>
+<msg timestamp="20201029 11:08:09.400" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/book_shop_db_init_mysql.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.400" endtime="20201029 11:08:09.432"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:03.983" endtime="20201029 10:02:04.012"></status>
+<status status="PASS" starttime="20201029 11:08:09.395" endtime="20201029 11:08:09.433"></status>
 </kw>
-<kw name="Given Create Target Book">
+<kw name="Given Create Target Book" library="Common">
 <kw name="Execute Sql Script" library="DatabaseLibrary">
 <doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
 state before running your tests, or clearing out your test data after running each a test. Set optional input
@@ -191,12 +204,12 @@ state before running your tests, or clearing out your test data after running ea
 <arguments>
 <arg>${CREATE_TARGET_BOOK}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.014" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/create_target_book.sql </msg>
-<status status="PASS" starttime="20201029 10:02:04.013" endtime="20201029 10:02:04.023"></status>
+<msg timestamp="20201029 11:08:09.453" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/create_target_book.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.440" endtime="20201029 11:08:09.455"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.013" endtime="20201029 10:02:04.023"></status>
+<status status="PASS" starttime="20201029 11:08:09.439" endtime="20201029 11:08:09.455"></status>
 </kw>
-<kw name="Given Target Book Exists">
+<kw name="Given Target Book Exists" library="Common">
 <kw name="Query" library="DatabaseLibrary">
 <doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
 input `sansTran` to True to run command without an explicit transaction commit or rollback.
@@ -207,9 +220,9 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <assign>
 <var>@{books}</var>
 </assign>
-<msg timestamp="20201029 10:02:04.033" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
-<msg timestamp="20201029 10:02:04.036" level="INFO">@{books} = [ (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500) ]</msg>
-<status status="PASS" starttime="20201029 10:02:04.033" endtime="20201029 10:02:04.036"></status>
+<msg timestamp="20201029 11:08:09.456" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
+<msg timestamp="20201029 11:08:09.464" level="INFO">@{books} = [ (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500) ]</msg>
+<status status="PASS" starttime="20201029 11:08:09.456" endtime="20201029 11:08:09.466"></status>
 </kw>
 <kw name="Length Should Be" library="BuiltIn">
 <doc>Verifies that the length of the given item is correct.</doc>
@@ -217,8 +230,8 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <arg>${books}</arg>
 <arg>${1}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.037" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20201029 10:02:04.036" endtime="20201029 10:02:04.037"></status>
+<msg timestamp="20201029 11:08:09.467" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20201029 11:08:09.467" endtime="20201029 11:08:09.467"></status>
 </kw>
 <kw name="Set Test Variable" library="BuiltIn">
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
@@ -226,12 +239,12 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <arg>${TARGET_BOOK}</arg>
 <arg>${books}[0]</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.050" level="INFO">${TARGET_BOOK} = (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500)</msg>
-<status status="PASS" starttime="20201029 10:02:04.037" endtime="20201029 10:02:04.050"></status>
+<msg timestamp="20201029 11:08:09.475" level="INFO">${TARGET_BOOK} = (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500)</msg>
+<status status="PASS" starttime="20201029 11:08:09.474" endtime="20201029 11:08:09.475"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.033" endtime="20201029 10:02:04.051"></status>
+<status status="PASS" starttime="20201029 11:08:09.455" endtime="20201029 11:08:09.475"></status>
 </kw>
-<kw name="Given Calculate new &quot;stock_quantity&quot; For Target Book">
+<kw name="Given Calculate new &quot;stock_quantity&quot; For Target Book" library="Common">
 <kw name="Set Variable" library="BuiltIn">
 <doc>Returns the given values which can then be assigned to a variables.</doc>
 <arguments>
@@ -240,8 +253,8 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <assign>
 <var>${current_stock_quantity}</var>
 </assign>
-<msg timestamp="20201029 10:02:04.052" level="INFO">${current_stock_quantity} = 23</msg>
-<status status="PASS" starttime="20201029 10:02:04.051" endtime="20201029 10:02:04.052"></status>
+<msg timestamp="20201029 11:08:09.485" level="INFO">${current_stock_quantity} = 23</msg>
+<status status="PASS" starttime="20201029 11:08:09.485" endtime="20201029 11:08:09.485"></status>
 </kw>
 <kw name="Evaluate" library="BuiltIn">
 <doc>Evaluates the given expression in Python and returns the result.</doc>
@@ -251,8 +264,8 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <assign>
 <var>${new_stock_quantity}</var>
 </assign>
-<msg timestamp="20201029 10:02:04.066" level="INFO">${new_stock_quantity} = 20</msg>
-<status status="PASS" starttime="20201029 10:02:04.052" endtime="20201029 10:02:04.066"></status>
+<msg timestamp="20201029 11:08:09.504" level="INFO">${new_stock_quantity} = 20</msg>
+<status status="PASS" starttime="20201029 11:08:09.485" endtime="20201029 11:08:09.504"></status>
 </kw>
 <kw name="Set Test Variable" library="BuiltIn">
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
@@ -260,12 +273,12 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <arg>${NEW_STOCK_QUANTITY}</arg>
 <arg>${new_stock_quantity}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.069" level="INFO">${NEW_STOCK_QUANTITY} = 20</msg>
-<status status="PASS" starttime="20201029 10:02:04.066" endtime="20201029 10:02:04.069"></status>
+<msg timestamp="20201029 11:08:09.505" level="INFO">${NEW_STOCK_QUANTITY} = 20</msg>
+<status status="PASS" starttime="20201029 11:08:09.504" endtime="20201029 11:08:09.505"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.051" endtime="20201029 10:02:04.077"></status>
+<status status="PASS" starttime="20201029 11:08:09.484" endtime="20201029 11:08:09.505"></status>
 </kw>
-<kw name="Given Form &quot;SQL Update Statement&quot; For Target Book">
+<kw name="Given Form &quot;SQL Update Statement&quot; For Target Book" library="Common">
 <kw name="Evaluate" library="BuiltIn">
 <doc>Evaluates the given expression in Python and returns the result.</doc>
 <arguments>
@@ -274,8 +287,8 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <assign>
 <var>${sql_update_book_statement}</var>
 </assign>
-<msg timestamp="20201029 10:02:04.079" level="INFO">${sql_update_book_statement} = update books set stock_quantity=20 where book_id=20;</msg>
-<status status="PASS" starttime="20201029 10:02:04.078" endtime="20201029 10:02:04.079"></status>
+<msg timestamp="20201029 11:08:09.510" level="INFO">${sql_update_book_statement} = update books set stock_quantity=20 where book_id=20;</msg>
+<status status="PASS" starttime="20201029 11:08:09.510" endtime="20201029 11:08:09.510"></status>
 </kw>
 <kw name="Create File" library="OperatingSystem">
 <doc>Creates a file with the given content and encoding.</doc>
@@ -283,12 +296,12 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <arg>path=${UPDATE_TARGET_BOOK}</arg>
 <arg>content=${sql_update_book_statement}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.095" level="INFO" html="yes">Created file '&lt;a href="file:///home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/update_target_book.sql"&gt;/home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/update_target_book.sql&lt;/a&gt;'.</msg>
-<status status="PASS" starttime="20201029 10:02:04.079" endtime="20201029 10:02:04.095"></status>
+<msg timestamp="20201029 11:08:09.516" level="INFO" html="yes">Created file '&lt;a href="file:///home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/update_target_book.sql"&gt;/home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/update_target_book.sql&lt;/a&gt;'.</msg>
+<status status="PASS" starttime="20201029 11:08:09.510" endtime="20201029 11:08:09.517"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.078" endtime="20201029 10:02:04.096"></status>
+<status status="PASS" starttime="20201029 11:08:09.509" endtime="20201029 11:08:09.517"></status>
 </kw>
-<kw name="When Target Books Stock Quantity Is Updated In Database">
+<kw name="When Target Books Stock Quantity Is Updated In Database" library="Common">
 <kw name="Execute Sql Script" library="DatabaseLibrary">
 <doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
 state before running your tests, or clearing out your test data after running each a test. Set optional input
@@ -296,12 +309,12 @@ state before running your tests, or clearing out your test data after running ea
 <arguments>
 <arg>${UPDATE_TARGET_BOOK}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.109" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/update_target_book.sql </msg>
-<status status="PASS" starttime="20201029 10:02:04.099" endtime="20201029 10:02:04.118"></status>
+<msg timestamp="20201029 11:08:09.520" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/update_target_book.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.519" endtime="20201029 11:08:09.527"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.099" endtime="20201029 10:02:04.119"></status>
+<status status="PASS" starttime="20201029 11:08:09.518" endtime="20201029 11:08:09.528"></status>
 </kw>
-<kw name="Then Target Book Exists">
+<kw name="Then Target Book Exists" library="Common">
 <kw name="Query" library="DatabaseLibrary">
 <doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
 input `sansTran` to True to run command without an explicit transaction commit or rollback.
@@ -312,9 +325,9 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <assign>
 <var>@{books}</var>
 </assign>
-<msg timestamp="20201029 10:02:04.124" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
-<msg timestamp="20201029 10:02:04.133" level="INFO">@{books} = [ (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 20, 500) ]</msg>
-<status status="PASS" starttime="20201029 10:02:04.124" endtime="20201029 10:02:04.133"></status>
+<msg timestamp="20201029 11:08:09.531" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
+<msg timestamp="20201029 11:08:09.534" level="INFO">@{books} = [ (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 20, 500) ]</msg>
+<status status="PASS" starttime="20201029 11:08:09.530" endtime="20201029 11:08:09.534"></status>
 </kw>
 <kw name="Length Should Be" library="BuiltIn">
 <doc>Verifies that the length of the given item is correct.</doc>
@@ -322,8 +335,8 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <arg>${books}</arg>
 <arg>${1}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.133" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20201029 10:02:04.133" endtime="20201029 10:02:04.133"></status>
+<msg timestamp="20201029 11:08:09.535" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20201029 11:08:09.534" endtime="20201029 11:08:09.535"></status>
 </kw>
 <kw name="Set Test Variable" library="BuiltIn">
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
@@ -331,12 +344,12 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <arg>${TARGET_BOOK}</arg>
 <arg>${books}[0]</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.136" level="INFO">${TARGET_BOOK} = (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 20, 500)</msg>
-<status status="PASS" starttime="20201029 10:02:04.133" endtime="20201029 10:02:04.136"></status>
+<msg timestamp="20201029 11:08:09.535" level="INFO">${TARGET_BOOK} = (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 20, 500)</msg>
+<status status="PASS" starttime="20201029 11:08:09.535" endtime="20201029 11:08:09.535"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.123" endtime="20201029 10:02:04.136"></status>
+<status status="PASS" starttime="20201029 11:08:09.530" endtime="20201029 11:08:09.535"></status>
 </kw>
-<kw name="Then &quot;stock_quantity&quot; For Target Book Updated">
+<kw name="Then &quot;stock_quantity&quot; For Target Book Updated" library="Common">
 <kw name="Set Variable" library="BuiltIn">
 <doc>Returns the given values which can then be assigned to a variables.</doc>
 <arguments>
@@ -345,8 +358,8 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <assign>
 <var>${current_stock_quantity}</var>
 </assign>
-<msg timestamp="20201029 10:02:04.137" level="INFO">${current_stock_quantity} = 20</msg>
-<status status="PASS" starttime="20201029 10:02:04.137" endtime="20201029 10:02:04.137"></status>
+<msg timestamp="20201029 11:08:09.540" level="INFO">${current_stock_quantity} = 20</msg>
+<status status="PASS" starttime="20201029 11:08:09.540" endtime="20201029 11:08:09.540"></status>
 </kw>
 <kw name="Should Be Equal" library="BuiltIn">
 <doc>Fails if the given objects are unequal.</doc>
@@ -354,32 +367,35 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <arg>${current_stock_quantity}</arg>
 <arg>${NEW_STOCK_QUANTITY}</arg>
 </arguments>
-<status status="PASS" starttime="20201029 10:02:04.137" endtime="20201029 10:02:04.137"></status>
+<status status="PASS" starttime="20201029 11:08:09.540" endtime="20201029 11:08:09.541"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.136" endtime="20201029 10:02:04.139"></status>
+<status status="PASS" starttime="20201029 11:08:09.539" endtime="20201029 11:08:09.541"></status>
 </kw>
 <tags>
 <tag>BAT</tag>
 <tag>CRUD</tag>
 <tag>Update</tag>
 </tags>
-<status status="PASS" starttime="20201029 10:02:03.983" endtime="20201029 10:02:04.139" critical="yes"></status>
+<status status="PASS" starttime="20201029 11:08:09.388" endtime="20201029 11:08:09.541" critical="yes"></status>
 </test>
-<test id="s1-t4" name="Deleting Target Book">
-<kw name="Initialize Database Contents" type="setup">
+<test id="s1-s1-t4" name="Deleting Target Book">
+<kw name="Initialize Database Contents" library="Common" type="setup">
+<arguments>
+<arg>${INITIALIZE_DATABASE_SQL}</arg>
+</arguments>
 <kw name="Execute Sql Script" library="DatabaseLibrary">
 <doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
 state before running your tests, or clearing out your test data after running each a test. Set optional input
 `sansTran` to True to run command without an explicit transaction commit or rollback.</doc>
 <arguments>
-<arg>${INITIALIZE_DATABASE_CONTENTS}</arg>
+<arg>${initialize_database_sql}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.159" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/book_shop_db_init.sql </msg>
-<status status="PASS" starttime="20201029 10:02:04.143" endtime="20201029 10:02:04.189"></status>
+<msg timestamp="20201029 11:08:09.549" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/book_shop_db_init_mysql.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.548" endtime="20201029 11:08:09.579"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.143" endtime="20201029 10:02:04.189"></status>
+<status status="PASS" starttime="20201029 11:08:09.548" endtime="20201029 11:08:09.580"></status>
 </kw>
-<kw name="Given Create Target Book">
+<kw name="Given Create Target Book" library="Common">
 <kw name="Execute Sql Script" library="DatabaseLibrary">
 <doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
 state before running your tests, or clearing out your test data after running each a test. Set optional input
@@ -387,12 +403,12 @@ state before running your tests, or clearing out your test data after running ea
 <arguments>
 <arg>${CREATE_TARGET_BOOK}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.190" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/create_target_book.sql </msg>
-<status status="PASS" starttime="20201029 10:02:04.190" endtime="20201029 10:02:04.194"></status>
+<msg timestamp="20201029 11:08:09.580" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/create_target_book.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.580" endtime="20201029 11:08:09.582"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.190" endtime="20201029 10:02:04.195"></status>
+<status status="PASS" starttime="20201029 11:08:09.580" endtime="20201029 11:08:09.582"></status>
 </kw>
-<kw name="Given Target Book Exists">
+<kw name="Given Target Book Exists" library="Common">
 <kw name="Query" library="DatabaseLibrary">
 <doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
 input `sansTran` to True to run command without an explicit transaction commit or rollback.
@@ -403,9 +419,9 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <assign>
 <var>@{books}</var>
 </assign>
-<msg timestamp="20201029 10:02:04.197" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
-<msg timestamp="20201029 10:02:04.202" level="INFO">@{books} = [ (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500) ]</msg>
-<status status="PASS" starttime="20201029 10:02:04.196" endtime="20201029 10:02:04.202"></status>
+<msg timestamp="20201029 11:08:09.586" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
+<msg timestamp="20201029 11:08:09.590" level="INFO">@{books} = [ (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500) ]</msg>
+<status status="PASS" starttime="20201029 11:08:09.586" endtime="20201029 11:08:09.590"></status>
 </kw>
 <kw name="Length Should Be" library="BuiltIn">
 <doc>Verifies that the length of the given item is correct.</doc>
@@ -413,8 +429,8 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <arg>${books}</arg>
 <arg>${1}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.202" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20201029 10:02:04.202" endtime="20201029 10:02:04.211"></status>
+<msg timestamp="20201029 11:08:09.590" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20201029 11:08:09.590" endtime="20201029 11:08:09.590"></status>
 </kw>
 <kw name="Set Test Variable" library="BuiltIn">
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
@@ -422,12 +438,12 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <arg>${TARGET_BOOK}</arg>
 <arg>${books}[0]</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.213" level="INFO">${TARGET_BOOK} = (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500)</msg>
-<status status="PASS" starttime="20201029 10:02:04.212" endtime="20201029 10:02:04.213"></status>
+<msg timestamp="20201029 11:08:09.591" level="INFO">${TARGET_BOOK} = (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500)</msg>
+<status status="PASS" starttime="20201029 11:08:09.590" endtime="20201029 11:08:09.591"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.196" endtime="20201029 10:02:04.216"></status>
+<status status="PASS" starttime="20201029 11:08:09.586" endtime="20201029 11:08:09.591"></status>
 </kw>
-<kw name="Given &quot;SQL Delete Statement&quot; Formed For Target Book">
+<kw name="Given &quot;SQL Delete Statement&quot; Formed For Target Book" library="Common">
 <kw name="Evaluate" library="BuiltIn">
 <doc>Evaluates the given expression in Python and returns the result.</doc>
 <arguments>
@@ -436,8 +452,8 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <assign>
 <var>${sql_delete_book_statement}</var>
 </assign>
-<msg timestamp="20201029 10:02:04.218" level="INFO">${sql_delete_book_statement} = delete from books where book_id=20;</msg>
-<status status="PASS" starttime="20201029 10:02:04.218" endtime="20201029 10:02:04.218"></status>
+<msg timestamp="20201029 11:08:09.605" level="INFO">${sql_delete_book_statement} = delete from books where book_id=20;</msg>
+<status status="PASS" starttime="20201029 11:08:09.604" endtime="20201029 11:08:09.605"></status>
 </kw>
 <kw name="Create File" library="OperatingSystem">
 <doc>Creates a file with the given content and encoding.</doc>
@@ -445,12 +461,12 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <arg>path=${DELETE_TARGET_BOOK}</arg>
 <arg>content=${sql_delete_book_statement}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.230" level="INFO" html="yes">Created file '&lt;a href="file:///home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/delete_target_book.sql"&gt;/home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/delete_target_book.sql&lt;/a&gt;'.</msg>
-<status status="PASS" starttime="20201029 10:02:04.218" endtime="20201029 10:02:04.234"></status>
+<msg timestamp="20201029 11:08:09.610" level="INFO" html="yes">Created file '&lt;a href="file:///home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/delete_target_book.sql"&gt;/home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/delete_target_book.sql&lt;/a&gt;'.</msg>
+<status status="PASS" starttime="20201029 11:08:09.605" endtime="20201029 11:08:09.610"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.217" endtime="20201029 10:02:04.243"></status>
+<status status="PASS" starttime="20201029 11:08:09.603" endtime="20201029 11:08:09.610"></status>
 </kw>
-<kw name="When Target Book is Deleted In Database">
+<kw name="When Target Book is Deleted In Database" library="Common">
 <kw name="Execute Sql Script" library="DatabaseLibrary">
 <doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
 state before running your tests, or clearing out your test data after running each a test. Set optional input
@@ -458,12 +474,12 @@ state before running your tests, or clearing out your test data after running ea
 <arguments>
 <arg>${DELETE_TARGET_BOOK}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.253" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/delete_target_book.sql </msg>
-<status status="PASS" starttime="20201029 10:02:04.252" endtime="20201029 10:02:04.258"></status>
+<msg timestamp="20201029 11:08:09.612" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/delete_target_book.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.612" endtime="20201029 11:08:09.616"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.243" endtime="20201029 10:02:04.258"></status>
+<status status="PASS" starttime="20201029 11:08:09.612" endtime="20201029 11:08:09.622"></status>
 </kw>
-<kw name="Then Target Book Does Not Exist In Database">
+<kw name="Then Target Book Does Not Exist In Database" library="Common">
 <kw name="Query" library="DatabaseLibrary">
 <doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
 input `sansTran` to True to run command without an explicit transaction commit or rollback.
@@ -474,9 +490,9 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <assign>
 <var>@{books}</var>
 </assign>
-<msg timestamp="20201029 10:02:04.263" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
-<msg timestamp="20201029 10:02:04.271" level="INFO">@{books} = [ ]</msg>
-<status status="PASS" starttime="20201029 10:02:04.262" endtime="20201029 10:02:04.271"></status>
+<msg timestamp="20201029 11:08:09.624" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
+<msg timestamp="20201029 11:08:09.632" level="INFO">@{books} = [ ]</msg>
+<status status="PASS" starttime="20201029 11:08:09.624" endtime="20201029 11:08:09.632"></status>
 </kw>
 <kw name="Length Should Be" library="BuiltIn">
 <doc>Verifies that the length of the given item is correct.</doc>
@@ -484,43 +500,568 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <arg>${books}</arg>
 <arg>${0}</arg>
 </arguments>
-<msg timestamp="20201029 10:02:04.272" level="INFO">Length is 0</msg>
-<status status="PASS" starttime="20201029 10:02:04.271" endtime="20201029 10:02:04.272"></status>
+<msg timestamp="20201029 11:08:09.632" level="INFO">Length is 0</msg>
+<status status="PASS" starttime="20201029 11:08:09.632" endtime="20201029 11:08:09.632"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.261" endtime="20201029 10:02:04.272"></status>
+<status status="PASS" starttime="20201029 11:08:09.622" endtime="20201029 11:08:09.633"></status>
 </kw>
 <tags>
 <tag>BAT</tag>
 <tag>CRUD</tag>
 <tag>Delete</tag>
 </tags>
-<status status="PASS" starttime="20201029 10:02:04.140" endtime="20201029 10:02:04.281" critical="yes"></status>
+<status status="PASS" starttime="20201029 11:08:09.542" endtime="20201029 11:08:09.637" critical="yes"></status>
 </test>
-<kw name="Close Database Connection" type="teardown">
+<kw name="Close Database Connection" library="Common" type="teardown">
 <kw name="Disconnect From Database" library="DatabaseLibrary">
 <doc>Disconnects from the database.</doc>
-<msg timestamp="20201029 10:02:04.286" level="INFO">Executing : Disconnect From Database</msg>
-<status status="PASS" starttime="20201029 10:02:04.286" endtime="20201029 10:02:04.288"></status>
+<msg timestamp="20201029 11:08:09.639" level="INFO">Executing : Disconnect From Database</msg>
+<status status="PASS" starttime="20201029 11:08:09.639" endtime="20201029 11:08:09.640"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:04.285" endtime="20201029 10:02:04.289"></status>
+<status status="PASS" starttime="20201029 11:08:09.638" endtime="20201029 11:08:09.640"></status>
 </kw>
-<status status="PASS" starttime="20201029 10:02:03.648" endtime="20201029 10:02:04.289"></status>
+<status status="PASS" starttime="20201029 11:08:09.105" endtime="20201029 11:08:09.640"></status>
+</suite>
+<suite id="s1-s2" name="Book Shop Db Tests Postgresql" source="/home/hakan/Python/Robot/robot-fw-database-library-tests/Tests/book_shop_db_tests_postgresql.robot">
+<kw name="Connect To Database and Check Tables Existence" library="Common" type="setup">
+<arguments>
+<arg>${BOOK_SHOB_DB_CONFIG_FILE}</arg>
+</arguments>
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
+connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
+<arguments>
+<arg>dbConfigFile=${book_shop_db_config_file}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.739" level="INFO">Connecting using : psycopg2.connect(database=book_shop_db, user=postgres, password=h1a2k3a4, host=localhost, port=5433) </msg>
+<status status="PASS" starttime="20201029 11:08:09.665" endtime="20201029 11:08:09.763"></status>
+</kw>
+<kw name="Table Must Exist" library="DatabaseLibrary">
+<doc>Check if the table given exists in the database. Set optional input `sansTran` to True to run command without an
+explicit transaction commit or rollback.</doc>
+<arguments>
+<arg>${BOOKS_TABLE}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.763" level="INFO">Executing : Table Must Exist  |  books </msg>
+<msg timestamp="20201029 11:08:09.764" level="INFO">Executing : Row Count  |  SELECT * FROM information_schema.tables WHERE table_name='books' </msg>
+<status status="PASS" starttime="20201029 11:08:09.763" endtime="20201029 11:08:09.768"></status>
+</kw>
+<kw name="Table Must Exist" library="DatabaseLibrary">
+<doc>Check if the table given exists in the database. Set optional input `sansTran` to True to run command without an
+explicit transaction commit or rollback.</doc>
+<arguments>
+<arg>${CUSTOMERS_TABLE}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.769" level="INFO">Executing : Table Must Exist  |  customers </msg>
+<msg timestamp="20201029 11:08:09.769" level="INFO">Executing : Row Count  |  SELECT * FROM information_schema.tables WHERE table_name='customers' </msg>
+<status status="PASS" starttime="20201029 11:08:09.769" endtime="20201029 11:08:09.770"></status>
+</kw>
+<kw name="Table Must Exist" library="DatabaseLibrary">
+<doc>Check if the table given exists in the database. Set optional input `sansTran` to True to run command without an
+explicit transaction commit or rollback.</doc>
+<arguments>
+<arg>${ORDERS_TABLE}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.770" level="INFO">Executing : Table Must Exist  |  orders </msg>
+<msg timestamp="20201029 11:08:09.770" level="INFO">Executing : Row Count  |  SELECT * FROM information_schema.tables WHERE table_name='orders' </msg>
+<status status="PASS" starttime="20201029 11:08:09.770" endtime="20201029 11:08:09.774"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.665" endtime="20201029 11:08:09.777"></status>
+</kw>
+<test id="s1-s2-t1" name="Creating Target Book">
+<kw name="Initialize Database Contents" library="Common" type="setup">
+<arguments>
+<arg>${INITIALIZE_DATABASE_SQL}</arg>
+</arguments>
+<kw name="Execute Sql Script" library="DatabaseLibrary">
+<doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
+state before running your tests, or clearing out your test data after running each a test. Set optional input
+`sansTran` to True to run command without an explicit transaction commit or rollback.</doc>
+<arguments>
+<arg>${initialize_database_sql}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.779" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/book_shop_db_init_postgresql.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.778" endtime="20201029 11:08:09.800"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.778" endtime="20201029 11:08:09.800"></status>
+</kw>
+<kw name="When Create Target Book" library="Common">
+<kw name="Execute Sql Script" library="DatabaseLibrary">
+<doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
+state before running your tests, or clearing out your test data after running each a test. Set optional input
+`sansTran` to True to run command without an explicit transaction commit or rollback.</doc>
+<arguments>
+<arg>${CREATE_TARGET_BOOK}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.802" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/create_target_book.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.802" endtime="20201029 11:08:09.807"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.801" endtime="20201029 11:08:09.808"></status>
+</kw>
+<kw name="Then Target Book Exists" library="Common">
+<kw name="Query" library="DatabaseLibrary">
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<arguments>
+<arg>${QUERY_TARGET_BOOK}</arg>
+</arguments>
+<assign>
+<var>@{books}</var>
+</assign>
+<msg timestamp="20201029 11:08:09.810" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
+<msg timestamp="20201029 11:08:09.812" level="INFO">@{books} = [ (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500) ]</msg>
+<status status="PASS" starttime="20201029 11:08:09.810" endtime="20201029 11:08:09.812"></status>
+</kw>
+<kw name="Length Should Be" library="BuiltIn">
+<doc>Verifies that the length of the given item is correct.</doc>
+<arguments>
+<arg>${books}</arg>
+<arg>${1}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.813" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20201029 11:08:09.812" endtime="20201029 11:08:09.813"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${TARGET_BOOK}</arg>
+<arg>${books}[0]</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.818" level="INFO">${TARGET_BOOK} = (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500)</msg>
+<status status="PASS" starttime="20201029 11:08:09.813" endtime="20201029 11:08:09.818"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.808" endtime="20201029 11:08:09.818"></status>
+</kw>
+<tags>
+<tag>BAT</tag>
+<tag>Create</tag>
+<tag>CRUD</tag>
+</tags>
+<status status="PASS" starttime="20201029 11:08:09.777" endtime="20201029 11:08:09.820" critical="yes"></status>
+</test>
+<test id="s1-s2-t2" name="Reading All Books">
+<kw name="Initialize Database Contents" library="Common" type="setup">
+<arguments>
+<arg>${INITIALIZE_DATABASE_SQL}</arg>
+</arguments>
+<kw name="Execute Sql Script" library="DatabaseLibrary">
+<doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
+state before running your tests, or clearing out your test data after running each a test. Set optional input
+`sansTran` to True to run command without an explicit transaction commit or rollback.</doc>
+<arguments>
+<arg>${initialize_database_sql}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.829" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/book_shop_db_init_postgresql.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.823" endtime="20201029 11:08:09.842"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.822" endtime="20201029 11:08:09.842"></status>
+</kw>
+<kw name="When All Books Are Queried In Database" library="Common">
+<kw name="Query" library="DatabaseLibrary">
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<arguments>
+<arg>${QUERY_ALL_BOOKS}</arg>
+</arguments>
+<assign>
+<var>@{books}</var>
+</assign>
+<msg timestamp="20201029 11:08:09.845" level="INFO">Executing : Query  |  select * from books; </msg>
+<msg timestamp="20201029 11:08:09.846" level="INFO">@{books} = [ (1, 'The Namesake', 'Jhumpa', 'Lahiri', 2003, 32, 291) | (2, 'Norse Mythology', 'Neil', 'Gaiman', 2016, 43, 304) | (3, 'American Gods', 'Neil', 'Gaiman', 2001, 12, 465) | (4, 'Interpreter of Maladie...</msg>
+<status status="PASS" starttime="20201029 11:08:09.844" endtime="20201029 11:08:09.846"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${books}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.847" level="INFO">${books} = [(1, 'The Namesake', 'Jhumpa', 'Lahiri', 2003, 32, 291), (2, 'Norse Mythology', 'Neil', 'Gaiman', 2016, 43, 304), (3, 'American Gods', 'Neil', 'Gaiman', 2001, 12, 465), (4, 'Interpreter of Maladies', ...</msg>
+<status status="PASS" starttime="20201029 11:08:09.846" endtime="20201029 11:08:09.847"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.844" endtime="20201029 11:08:09.847"></status>
+</kw>
+<kw name="Then Books Are Found" library="Common">
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${books}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.849" level="INFO">Length is 19</msg>
+<status status="PASS" starttime="20201029 11:08:09.848" endtime="20201029 11:08:09.849"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.848" endtime="20201029 11:08:09.849"></status>
+</kw>
+<tags>
+<tag>BAT</tag>
+<tag>CRUD</tag>
+<tag>Read</tag>
+</tags>
+<status status="PASS" starttime="20201029 11:08:09.820" endtime="20201029 11:08:09.852" critical="yes"></status>
+</test>
+<test id="s1-s2-t3" name="Updating Target Book">
+<kw name="Initialize Database Contents" library="Common" type="setup">
+<arguments>
+<arg>${INITIALIZE_DATABASE_SQL}</arg>
+</arguments>
+<kw name="Execute Sql Script" library="DatabaseLibrary">
+<doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
+state before running your tests, or clearing out your test data after running each a test. Set optional input
+`sansTran` to True to run command without an explicit transaction commit or rollback.</doc>
+<arguments>
+<arg>${initialize_database_sql}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.854" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/book_shop_db_init_postgresql.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.853" endtime="20201029 11:08:09.871"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.853" endtime="20201029 11:08:09.871"></status>
+</kw>
+<kw name="Given Create Target Book" library="Common">
+<kw name="Execute Sql Script" library="DatabaseLibrary">
+<doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
+state before running your tests, or clearing out your test data after running each a test. Set optional input
+`sansTran` to True to run command without an explicit transaction commit or rollback.</doc>
+<arguments>
+<arg>${CREATE_TARGET_BOOK}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.873" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/create_target_book.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.871" endtime="20201029 11:08:09.881"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.871" endtime="20201029 11:08:09.881"></status>
+</kw>
+<kw name="Given Target Book Exists" library="Common">
+<kw name="Query" library="DatabaseLibrary">
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<arguments>
+<arg>${QUERY_TARGET_BOOK}</arg>
+</arguments>
+<assign>
+<var>@{books}</var>
+</assign>
+<msg timestamp="20201029 11:08:09.882" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
+<msg timestamp="20201029 11:08:09.883" level="INFO">@{books} = [ (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500) ]</msg>
+<status status="PASS" starttime="20201029 11:08:09.882" endtime="20201029 11:08:09.883"></status>
+</kw>
+<kw name="Length Should Be" library="BuiltIn">
+<doc>Verifies that the length of the given item is correct.</doc>
+<arguments>
+<arg>${books}</arg>
+<arg>${1}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.883" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20201029 11:08:09.883" endtime="20201029 11:08:09.883"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${TARGET_BOOK}</arg>
+<arg>${books}[0]</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.887" level="INFO">${TARGET_BOOK} = (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500)</msg>
+<status status="PASS" starttime="20201029 11:08:09.883" endtime="20201029 11:08:09.888"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.882" endtime="20201029 11:08:09.888"></status>
+</kw>
+<kw name="Given Calculate new &quot;stock_quantity&quot; For Target Book" library="Common">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${TARGET_BOOK}[${STOCK_QUANTITY}]</arg>
+</arguments>
+<assign>
+<var>${current_stock_quantity}</var>
+</assign>
+<msg timestamp="20201029 11:08:09.895" level="INFO">${current_stock_quantity} = 23</msg>
+<status status="PASS" starttime="20201029 11:08:09.895" endtime="20201029 11:08:09.895"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>$current_stock_quantity - 3</arg>
+</arguments>
+<assign>
+<var>${new_stock_quantity}</var>
+</assign>
+<msg timestamp="20201029 11:08:09.895" level="INFO">${new_stock_quantity} = 20</msg>
+<status status="PASS" starttime="20201029 11:08:09.895" endtime="20201029 11:08:09.895"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${NEW_STOCK_QUANTITY}</arg>
+<arg>${new_stock_quantity}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.896" level="INFO">${NEW_STOCK_QUANTITY} = 20</msg>
+<status status="PASS" starttime="20201029 11:08:09.895" endtime="20201029 11:08:09.896"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.894" endtime="20201029 11:08:09.902"></status>
+</kw>
+<kw name="Given Form &quot;SQL Update Statement&quot; For Target Book" library="Common">
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>${SQL TEMPLATE}[update_book] % (${NEW_STOCK_QUANTITY}, ${TARGET_BOOK}[${BOOKS_ID}])</arg>
+</arguments>
+<assign>
+<var>${sql_update_book_statement}</var>
+</assign>
+<msg timestamp="20201029 11:08:09.904" level="INFO">${sql_update_book_statement} = update books set stock_quantity=20 where book_id=20;</msg>
+<status status="PASS" starttime="20201029 11:08:09.904" endtime="20201029 11:08:09.904"></status>
+</kw>
+<kw name="Create File" library="OperatingSystem">
+<doc>Creates a file with the given content and encoding.</doc>
+<arguments>
+<arg>path=${UPDATE_TARGET_BOOK}</arg>
+<arg>content=${sql_update_book_statement}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.907" level="INFO" html="yes">Created file '&lt;a href="file:///home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/update_target_book.sql"&gt;/home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/update_target_book.sql&lt;/a&gt;'.</msg>
+<status status="PASS" starttime="20201029 11:08:09.904" endtime="20201029 11:08:09.907"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.902" endtime="20201029 11:08:09.907"></status>
+</kw>
+<kw name="When Target Books Stock Quantity Is Updated In Database" library="Common">
+<kw name="Execute Sql Script" library="DatabaseLibrary">
+<doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
+state before running your tests, or clearing out your test data after running each a test. Set optional input
+`sansTran` to True to run command without an explicit transaction commit or rollback.</doc>
+<arguments>
+<arg>${UPDATE_TARGET_BOOK}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.908" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/update_target_book.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.908" endtime="20201029 11:08:09.914"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.907" endtime="20201029 11:08:09.914"></status>
+</kw>
+<kw name="Then Target Book Exists" library="Common">
+<kw name="Query" library="DatabaseLibrary">
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<arguments>
+<arg>${QUERY_TARGET_BOOK}</arg>
+</arguments>
+<assign>
+<var>@{books}</var>
+</assign>
+<msg timestamp="20201029 11:08:09.917" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
+<msg timestamp="20201029 11:08:09.919" level="INFO">@{books} = [ (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 20, 500) ]</msg>
+<status status="PASS" starttime="20201029 11:08:09.916" endtime="20201029 11:08:09.919"></status>
+</kw>
+<kw name="Length Should Be" library="BuiltIn">
+<doc>Verifies that the length of the given item is correct.</doc>
+<arguments>
+<arg>${books}</arg>
+<arg>${1}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.919" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20201029 11:08:09.919" endtime="20201029 11:08:09.920"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${TARGET_BOOK}</arg>
+<arg>${books}[0]</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.920" level="INFO">${TARGET_BOOK} = (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 20, 500)</msg>
+<status status="PASS" starttime="20201029 11:08:09.920" endtime="20201029 11:08:09.920"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.916" endtime="20201029 11:08:09.920"></status>
+</kw>
+<kw name="Then &quot;stock_quantity&quot; For Target Book Updated" library="Common">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${TARGET_BOOK}[${STOCK_QUANTITY}]</arg>
+</arguments>
+<assign>
+<var>${current_stock_quantity}</var>
+</assign>
+<msg timestamp="20201029 11:08:09.922" level="INFO">${current_stock_quantity} = 20</msg>
+<status status="PASS" starttime="20201029 11:08:09.922" endtime="20201029 11:08:09.922"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${current_stock_quantity}</arg>
+<arg>${NEW_STOCK_QUANTITY}</arg>
+</arguments>
+<status status="PASS" starttime="20201029 11:08:09.923" endtime="20201029 11:08:09.924"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.922" endtime="20201029 11:08:09.924"></status>
+</kw>
+<tags>
+<tag>BAT</tag>
+<tag>CRUD</tag>
+<tag>Update</tag>
+</tags>
+<status status="PASS" starttime="20201029 11:08:09.853" endtime="20201029 11:08:09.932" critical="yes"></status>
+</test>
+<test id="s1-s2-t4" name="Deleting Target Book">
+<kw name="Initialize Database Contents" library="Common" type="setup">
+<arguments>
+<arg>${INITIALIZE_DATABASE_SQL}</arg>
+</arguments>
+<kw name="Execute Sql Script" library="DatabaseLibrary">
+<doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
+state before running your tests, or clearing out your test data after running each a test. Set optional input
+`sansTran` to True to run command without an explicit transaction commit or rollback.</doc>
+<arguments>
+<arg>${initialize_database_sql}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.935" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/book_shop_db_init_postgresql.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.934" endtime="20201029 11:08:09.954"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.934" endtime="20201029 11:08:09.954"></status>
+</kw>
+<kw name="Given Create Target Book" library="Common">
+<kw name="Execute Sql Script" library="DatabaseLibrary">
+<doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
+state before running your tests, or clearing out your test data after running each a test. Set optional input
+`sansTran` to True to run command without an explicit transaction commit or rollback.</doc>
+<arguments>
+<arg>${CREATE_TARGET_BOOK}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.955" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/create_target_book.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.955" endtime="20201029 11:08:09.956"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.954" endtime="20201029 11:08:09.957"></status>
+</kw>
+<kw name="Given Target Book Exists" library="Common">
+<kw name="Query" library="DatabaseLibrary">
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<arguments>
+<arg>${QUERY_TARGET_BOOK}</arg>
+</arguments>
+<assign>
+<var>@{books}</var>
+</assign>
+<msg timestamp="20201029 11:08:09.961" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
+<msg timestamp="20201029 11:08:09.964" level="INFO">@{books} = [ (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500) ]</msg>
+<status status="PASS" starttime="20201029 11:08:09.961" endtime="20201029 11:08:09.964"></status>
+</kw>
+<kw name="Length Should Be" library="BuiltIn">
+<doc>Verifies that the length of the given item is correct.</doc>
+<arguments>
+<arg>${books}</arg>
+<arg>${1}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.965" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20201029 11:08:09.965" endtime="20201029 11:08:09.965"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${TARGET_BOOK}</arg>
+<arg>${books}[0]</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.966" level="INFO">${TARGET_BOOK} = (20, 'Nutuk', 'Mustafa Kemal', 'Ataturk', 1923, 23, 500)</msg>
+<status status="PASS" starttime="20201029 11:08:09.965" endtime="20201029 11:08:09.966"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.958" endtime="20201029 11:08:09.966"></status>
+</kw>
+<kw name="Given &quot;SQL Delete Statement&quot; Formed For Target Book" library="Common">
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>${SQL TEMPLATE}[delete_book] % ${TARGET_BOOK}[${BOOKS_ID}]</arg>
+</arguments>
+<assign>
+<var>${sql_delete_book_statement}</var>
+</assign>
+<msg timestamp="20201029 11:08:09.978" level="INFO">${sql_delete_book_statement} = delete from books where book_id=20;</msg>
+<status status="PASS" starttime="20201029 11:08:09.973" endtime="20201029 11:08:09.978"></status>
+</kw>
+<kw name="Create File" library="OperatingSystem">
+<doc>Creates a file with the given content and encoding.</doc>
+<arguments>
+<arg>path=${DELETE_TARGET_BOOK}</arg>
+<arg>content=${sql_delete_book_statement}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.981" level="INFO" html="yes">Created file '&lt;a href="file:///home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/delete_target_book.sql"&gt;/home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/delete_target_book.sql&lt;/a&gt;'.</msg>
+<status status="PASS" starttime="20201029 11:08:09.978" endtime="20201029 11:08:09.981"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.972" endtime="20201029 11:08:09.982"></status>
+</kw>
+<kw name="When Target Book is Deleted In Database" library="Common">
+<kw name="Execute Sql Script" library="DatabaseLibrary">
+<doc>Executes the content of the `sqlScriptFileName` as SQL commands. Useful for setting the database to a known
+state before running your tests, or clearing out your test data after running each a test. Set optional input
+`sansTran` to True to run command without an explicit transaction commit or rollback.</doc>
+<arguments>
+<arg>${DELETE_TARGET_BOOK}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:09.983" level="INFO">Executing : Execute SQL Script  |  /home/hakan/Python/Robot/robot-fw-database-library-tests/Resources/delete_target_book.sql </msg>
+<status status="PASS" starttime="20201029 11:08:09.983" endtime="20201029 11:08:09.990"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.983" endtime="20201029 11:08:09.990"></status>
+</kw>
+<kw name="Then Target Book Does Not Exist In Database" library="Common">
+<kw name="Query" library="DatabaseLibrary">
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<arguments>
+<arg>${QUERY_TARGET_BOOK}</arg>
+</arguments>
+<assign>
+<var>@{books}</var>
+</assign>
+<msg timestamp="20201029 11:08:10.006" level="INFO">Executing : Query  |  select * from books where title='Nutuk' and author_lname='Ataturk' </msg>
+<msg timestamp="20201029 11:08:10.007" level="INFO">@{books} = [ ]</msg>
+<status status="PASS" starttime="20201029 11:08:10.004" endtime="20201029 11:08:10.007"></status>
+</kw>
+<kw name="Length Should Be" library="BuiltIn">
+<doc>Verifies that the length of the given item is correct.</doc>
+<arguments>
+<arg>${books}</arg>
+<arg>${0}</arg>
+</arguments>
+<msg timestamp="20201029 11:08:10.008" level="INFO">Length is 0</msg>
+<status status="PASS" starttime="20201029 11:08:10.008" endtime="20201029 11:08:10.008"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:10.003" endtime="20201029 11:08:10.013"></status>
+</kw>
+<tags>
+<tag>BAT</tag>
+<tag>CRUD</tag>
+<tag>Delete</tag>
+</tags>
+<status status="PASS" starttime="20201029 11:08:09.933" endtime="20201029 11:08:10.014" critical="yes"></status>
+</test>
+<kw name="Close Database Connection" library="Common" type="teardown">
+<kw name="Disconnect From Database" library="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<msg timestamp="20201029 11:08:10.034" level="INFO">Executing : Disconnect From Database</msg>
+<status status="PASS" starttime="20201029 11:08:10.032" endtime="20201029 11:08:10.036"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:10.032" endtime="20201029 11:08:10.036"></status>
+</kw>
+<status status="PASS" starttime="20201029 11:08:09.642" endtime="20201029 11:08:10.036"></status>
+</suite>
+<status status="PASS" starttime="20201029 11:08:09.026" endtime="20201029 11:08:10.051"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="4" fail="0">Critical Tests</stat>
-<stat pass="4" fail="0">All Tests</stat>
+<stat pass="8" fail="0">Critical Tests</stat>
+<stat pass="8" fail="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="4" fail="0">BAT</stat>
-<stat pass="1" fail="0">Create</stat>
-<stat pass="4" fail="0">CRUD</stat>
-<stat pass="1" fail="0">Delete</stat>
-<stat pass="1" fail="0">Read</stat>
-<stat pass="1" fail="0">Update</stat>
+<stat pass="8" fail="0">BAT</stat>
+<stat pass="2" fail="0">Create</stat>
+<stat pass="8" fail="0">CRUD</stat>
+<stat pass="2" fail="0">Delete</stat>
+<stat pass="2" fail="0">Read</stat>
+<stat pass="2" fail="0">Update</stat>
 </tag>
 <suite>
-<stat pass="4" fail="0" id="s1" name="Book Shop Db Tests">Book Shop Db Tests</stat>
+<stat pass="8" fail="0" id="s1" name="Tests">Tests</stat>
+<stat pass="4" fail="0" id="s1-s1" name="Book Shop Db Tests Mysql">Tests.Book Shop Db Tests Mysql</stat>
+<stat pass="4" fail="0" id="s1-s2" name="Book Shop Db Tests Postgresql">Tests.Book Shop Db Tests Postgresql</stat>
 </suite>
 </statistics>
 <errors>
