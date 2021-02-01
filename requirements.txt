@@ -1,0 +1,8 @@
+mysqlclient==1.4.6
+psycopg2==2.8.6
+PyMySQL==0.9.3
+robotframework==3.2.1
+robotframework-databaselibrary==1.2.4
+robotframework-seleniumlibrary==4.4.0
+selenium==3.141.0
+urllib3==1.25.9
